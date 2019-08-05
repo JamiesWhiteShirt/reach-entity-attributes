@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "package": "com.jamieswhiteshirt.reachentityattributes.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "LivingEntityMixin",
+    "PlayerEntityMixin",
+    "ServerPlayerInteractionManagerMixin",
+    "ServerPlayNetworkHandlerMixin"
+  ],
+  "client": [
+    "client.ClientPlayerInteractionManagerMixin",
+    "client.GameRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
