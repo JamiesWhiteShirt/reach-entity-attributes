@@ -21,7 +21,7 @@ public abstract class LivingEntityMixin extends Entity {
         at = @At("TAIL")
     )
     private void initAttributes(CallbackInfo ci) {
-        ((LivingEntity) (Object) this).getAttributeContainer().register(ReachEntityAttributes.REACH);
-        ((LivingEntity) (Object) this).getAttributeContainer().register(ReachEntityAttributes.ATTACK_RANGE);
+        ((LivingEntity) (Object) this).getAttributes().register(ReachEntityAttributes.REACH);
+        ((LivingEntity) (Object) this).getAttributes().register(ReachEntityAttributes.ATTACK_RANGE);
     }
 }
