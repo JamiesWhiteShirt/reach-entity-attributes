@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 @Mixin(ServerPlayNetworkHandler.class)
 public abstract class ServerPlayNetworkHandlerMixin {
     @ModifyConstant(
-        method = "onPlayerInteractEntity(Lnet/minecraft/server/network/packet/PlayerInteractEntityC2SPacket;)V",
+        method = "onPlayerInteractEntity(Lnet/minecraft/network/packet/c2s/play/PlayerInteractEntityC2SPacket;)V",
         constant = {
             @Constant(doubleValue = 36.0D),
             @Constant(doubleValue = 9.0D)
@@ -20,7 +20,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
     }
 
     @ModifyConstant(
-        method = "onPlayerInteractBlock(Lnet/minecraft/server/network/packet/PlayerInteractBlockC2SPacket;)V",
+        method = "onPlayerInteractBlock(Lnet/minecraft/network/packet/c2s/play/PlayerInteractBlockC2SPacket;)V",
         constant = {
             @Constant(doubleValue = 64.0D)
         }
