@@ -19,8 +19,7 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(
         method = "createLivingAttributes()Lnet/minecraft/entity/attribute/DefaultAttributeContainer$Builder;",
-        at = @At("RETURN"),
-        cancellable = true
+        at = @At("RETURN")
     )
     private static void initAttributes(CallbackInfoReturnable<DefaultAttributeContainer.Builder> ci) {
         ci.getReturnValue().add(ReachEntityAttributes.REACH);
