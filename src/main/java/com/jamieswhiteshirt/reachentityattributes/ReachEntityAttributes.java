@@ -3,10 +3,12 @@ package com.jamieswhiteshirt.reachentityattributes;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.ClampedEntityAttribute;
 import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 public class ReachEntityAttributes {
-    public static final EntityAttribute REACH = (new ClampedEntityAttribute(null, "generic.reach-entity-attributes.reach", 0.0D, -1024.0D, 1024.0D)).setName("Reach").setTracked(true);
-    public static final EntityAttribute ATTACK_RANGE = (new ClampedEntityAttribute(null, "generic.reach-entity-attributes.attackRange", 0.0D, -1024.0D, 1024.0D)).setName("Attack Range").setTracked(true);
+    public static final EntityAttribute REACH = register("reach", new ClampedEntityAttribute("attribute.name.generic.reach-entity-attributes.reach", 0.0D, -1024.0D, 1024.0D)).setTracked(true);
+    public static final EntityAttribute ATTACK_RANGE = register("attack_range", new ClampedEntityAttribute("attribute.name.generic.reach-entity-attributes.attack_range", 0.0D, -1024.0D, 1024.0D)).setTracked(true);
 
     public static double getReachDistance(LivingEntity entity, double baseValue) {
         return baseValue + entity.getAttributeInstance(REACH).getValue();
@@ -26,5 +28,9 @@ public class ReachEntityAttributes {
         double baseValue = Math.sqrt(squaredBaseValue);
         double value = baseValue + entity.getAttributeInstance(ReachEntityAttributes.ATTACK_RANGE).getValue();
         return value * value;
+    }
+
+    private static EntityAttribute register(String name, EntityAttribute attribute) {
+        return Registry.register(Registry.ATTRIBUTES, new Identifier("reach-entity-attributes", name), attribute);
     }
 }
