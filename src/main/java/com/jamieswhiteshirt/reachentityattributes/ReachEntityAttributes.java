@@ -16,7 +16,7 @@ public class ReachEntityAttributes {
 
     public static double getSquaredReachDistance(LivingEntity entity, double squaredBaseValue) {
         double baseReachDistance = Math.sqrt(squaredBaseValue);
-        double value = baseReachDistance + entity.getAttributeInstance(ReachEntityAttributes.REACH).getValue();
+        double value = baseReachDistance + entity.getAttributeInstance(REACH).getValue();
         return value * value;
     }
 
@@ -26,11 +26,11 @@ public class ReachEntityAttributes {
 
     public static double getSquaredAttackRange(LivingEntity entity, double squaredBaseValue) {
         double baseValue = Math.sqrt(squaredBaseValue);
-        double value = baseValue + entity.getAttributeInstance(ReachEntityAttributes.ATTACK_RANGE).getValue();
+        double value = baseValue + entity.getAttributeInstance(ATTACK_RANGE).getValue();
         return value * value;
     }
 
     private static EntityAttribute register(String name, EntityAttribute attribute) {
-        return Registry.register(Registry.ATTRIBUTES, new Identifier("reach-entity-attributes", name), attribute);
+        return Registry.register(Registry.ATTRIBUTE, new Identifier("reach-entity-attributes", name), attribute);
     }
 }
