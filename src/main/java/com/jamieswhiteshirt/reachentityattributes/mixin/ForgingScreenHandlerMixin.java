@@ -10,8 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
-// For some reason this class does not use the static helper method in the superclass
-@Mixin(ForgingScreenHandler.class) // Anvil, Smithing Table
+@Mixin(ForgingScreenHandler.class)
 public abstract class ForgingScreenHandlerMixin extends ScreenHandler {
     protected ForgingScreenHandlerMixin(@Nullable ScreenHandlerType<?> screenHandlerType, int i) {
         super(screenHandlerType, i);

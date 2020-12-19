@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
     EnderChestBlockEntity.class,
     LootableContainerBlockEntity.class,
     PlayerInventory.class,
-    StorageMinecartEntity.class // Minecart with Chest, Minecart with Hopper
+    StorageMinecartEntity.class
 }, targets = {
     "net.minecraft.block.entity.LecternBlockEntity$1"
 })

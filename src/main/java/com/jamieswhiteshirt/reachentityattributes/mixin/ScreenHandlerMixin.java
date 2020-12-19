@@ -17,7 +17,7 @@ public abstract class ScreenHandlerMixin {
             @Constant(doubleValue = 64.0D)
         }
     )
-    private static double modifyReachDistance(double value, /*Method parameters*/ Block block, PlayerEntity player) {
+    private static double modifyReachDistance(double value, Block block, PlayerEntity player) {
         return ReachEntityAttributes.getSquaredReachDistance(player, value);
     }
 }
