@@ -5,14 +5,13 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.screen.ForgingScreenHandler;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
 @Mixin(ForgingScreenHandler.class)
 public abstract class ForgingScreenHandlerMixin extends ScreenHandler {
-    protected ForgingScreenHandlerMixin(@Nullable ScreenHandlerType<?> screenHandlerType, int i) {
+    protected ForgingScreenHandlerMixin(ScreenHandlerType<?> screenHandlerType, int i) {
         super(screenHandlerType, i);
     }
 
