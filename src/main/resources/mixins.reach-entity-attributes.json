@@ -3,10 +3,13 @@
   "package": "com.jamieswhiteshirt.reachentityattributes.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "ForgingScreenHandlerMixin",
+    "InventoryImplsMixin",
     "LivingEntityMixin",
     "PlayerEntityMixin",
-    "ServerPlayerInteractionManagerMixin",
-    "ServerPlayNetworkHandlerMixin"
+    "ScreenHandlerMixin",
+    "ServerPlayNetworkHandlerMixin",
+    "ServerPlayerInteractionManagerMixin"
   ],
   "client": [
     "client.ClientPlayerInteractionManagerMixin",
