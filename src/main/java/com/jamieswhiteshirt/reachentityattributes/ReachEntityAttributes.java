@@ -7,6 +7,10 @@ import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@ParametersAreNonnullByDefault
 public final class ReachEntityAttributes {
     public static final EntityAttribute REACH = make("reach", 0.0, -1024.0, 1024.0);
     public static final EntityAttribute ATTACK_RANGE = make("attack_range", 0.0, -1024.0, 1024.0);
@@ -15,7 +19,7 @@ public final class ReachEntityAttributes {
     }
 
     public static double getReachDistance(final LivingEntity entity, final double baseValue) {
-        final EntityAttributeInstance reach = entity.getAttributeInstance(REACH);
+        @Nullable final EntityAttributeInstance reach = entity.getAttributeInstance(REACH);
         return (reach != null) ? (baseValue + reach.getValue()) : baseValue;
     }
 
@@ -25,7 +29,7 @@ public final class ReachEntityAttributes {
     }
 
     public static double getAttackRange(final LivingEntity entity, final double baseValue) {
-        final EntityAttributeInstance range = entity.getAttributeInstance(ATTACK_RANGE);
+        @Nullable final EntityAttributeInstance range = entity.getAttributeInstance(ATTACK_RANGE);
         return (range != null) ? (baseValue + range.getValue()) : baseValue;
     }
 
