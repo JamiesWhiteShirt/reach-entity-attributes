@@ -3,6 +3,7 @@
   "package": "com.jamieswhiteshirt.reachentityattributes.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "ChestBlockEntityMixin",
     "ForgingScreenHandlerMixin",
     "InventoryImplsMixin",
     "LivingEntityMixin",
