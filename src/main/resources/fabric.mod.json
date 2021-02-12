@@ -5,7 +5,8 @@
   "name": "Reach Entity Attribute",
   "description": "Library of entity attributes for armor, tools, potions, etc. to increase or decrease reach distance and attack range.",
   "authors": [
-    "JamiesWhiteShirt"
+    "JamiesWhiteShirt",
+    "Chloe Dawn"
   ],
   "contact": {
     "sources": "https://github.com/JamiesWhiteShirt/reach-entity-attribute",
@@ -17,8 +18,9 @@
     "mixins.reach-entity-attributes.json"
   ],
   "depends": {
-    "fabricloader": ">=0.4.0",
-    "fabric-resource-loader-v0": "*"
+    "minecraft": ">=1.16.4",
+    "fabricloader": ">=0.11.1",
+    "fabric-resource-loader-v0": ">=0.4.2"
   },
   "custom": {
     "modmenu:api": true

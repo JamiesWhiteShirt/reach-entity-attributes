@@ -18,7 +18,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class ChestBlockEntityMixin {
     @Inject(
         method = "countViewers(Lnet/minecraft/world/World;Lnet/minecraft/block/entity/LockableContainerBlockEntity;III)I",
-        at = @At("HEAD"), cancellable = true
+        at = @At("HEAD"),
+        cancellable = true
     )
     private static void countViewersAccountingForReach(final World level, final LockableContainerBlockEntity be, final int x, final int y, final int z, final CallbackInfoReturnable<Integer> info) {
         int count = 0;

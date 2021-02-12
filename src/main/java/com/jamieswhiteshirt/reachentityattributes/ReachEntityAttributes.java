@@ -3,34 +3,41 @@ package com.jamieswhiteshirt.reachentityattributes;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.ClampedEntityAttribute;
 import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-public class ReachEntityAttributes {
-    public static final EntityAttribute REACH = register("reach", new ClampedEntityAttribute("attribute.name.generic.reach-entity-attributes.reach", 0.0D, -1024.0D, 1024.0D)).setTracked(true);
-    public static final EntityAttribute ATTACK_RANGE = register("attack_range", new ClampedEntityAttribute("attribute.name.generic.reach-entity-attributes.attack_range", 0.0D, -1024.0D, 1024.0D)).setTracked(true);
+public final class ReachEntityAttributes {
+    public static final EntityAttribute REACH = make("reach", 0.0, -1024.0, 1024.0);
+    public static final EntityAttribute ATTACK_RANGE = make("attack_range", 0.0, -1024.0, 1024.0);
 
-    public static double getReachDistance(LivingEntity entity, double baseValue) {
-        return baseValue + entity.getAttributeInstance(REACH).getValue();
+    private ReachEntityAttributes() {
     }
 
-    public static double getSquaredReachDistance(LivingEntity entity, double squaredBaseValue) {
-        double baseReachDistance = Math.sqrt(squaredBaseValue);
-        double value = baseReachDistance + entity.getAttributeInstance(ReachEntityAttributes.REACH).getValue();
-        return value * value;
+    public static double getReachDistance(final LivingEntity entity, final double baseValue) {
+        final EntityAttributeInstance reach = entity.getAttributeInstance(REACH);
+        return (reach != null) ? (baseValue + reach.getValue()) : baseValue;
     }
 
-    public static double getAttackRange(LivingEntity entity, double baseValue) {
-        return baseValue + entity.getAttributeInstance(ATTACK_RANGE).getValue();
+    public static double getSquaredReachDistance(final LivingEntity entity, final double squaredBaseValue) {
+        final double reachDistance = getReachDistance(entity, Math.sqrt(squaredBaseValue));
+        return reachDistance * reachDistance;
     }
 
-    public static double getSquaredAttackRange(LivingEntity entity, double squaredBaseValue) {
-        double baseValue = Math.sqrt(squaredBaseValue);
-        double value = baseValue + entity.getAttributeInstance(ReachEntityAttributes.ATTACK_RANGE).getValue();
-        return value * value;
+    public static double getAttackRange(final LivingEntity entity, final double baseValue) {
+        final EntityAttributeInstance range = entity.getAttributeInstance(ATTACK_RANGE);
+        return (range != null) ? (baseValue + range.getValue()) : baseValue;
     }
 
-    private static EntityAttribute register(String name, EntityAttribute attribute) {
-        return Registry.register(Registry.ATTRIBUTES, new Identifier("reach-entity-attributes", name), attribute);
+    public static double getSquaredAttackRange(final LivingEntity entity, final double squaredBaseValue) {
+        final double attackRange = getAttackRange(entity, Math.sqrt(squaredBaseValue));
+        return attackRange * attackRange;
+    }
+
+    private static EntityAttribute make(final String name, final double base, final double min, final double max) {
+        final Identifier id = new Identifier("reach-entity-attributes", name);
+        final String key = "attribute.name.generic.reach-entity-attributes." + name;
+        final EntityAttribute attribute = new ClampedEntityAttribute(key, base, min, max).setTracked(true);
+        return Registry.register(Registry.ATTRIBUTE, id, attribute);
     }
 }
