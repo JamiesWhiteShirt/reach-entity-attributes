@@ -1,23 +1,22 @@
 {
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_8",
   "required": true,
   "package": "com.jamieswhiteshirt.reachentityattributes.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "client": [
+    "client.ClientPlayerInteractionManagerMixin",
+    "client.GameRendererMixin"
+  ],
   "mixins": [
     "ChestBlockEntityMixin",
     "EnderChestBlockEntityMixin",
     "ForgingScreenHandlerMixin",
-    "InventoryImplsMixin",
+    "InventoryValidationMixin",
     "LivingEntityMixin",
     "PlayerEntityMixin",
     "ScreenHandlerMixin",
     "ServerPlayNetworkHandlerMixin",
     "ServerPlayerInteractionManagerMixin"
   ],
-  "client": [
-    "client.ClientPlayerInteractionManagerMixin",
-    "client.GameRendererMixin"
-  ],
-  "injectors": {
-    "defaultRequire": 1
-  }
+  "refmap": "refmap.reach-entity-attributes.json"
 }

@@ -22,14 +22,11 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 }, targets = {
     "net.minecraft.block.entity.LecternBlockEntity$1"
 })
-public abstract class InventoryImplsMixin implements Inventory {
+abstract class InventoryValidationMixin implements Inventory {
     @ModifyConstant(
         method = "canPlayerUse(Lnet/minecraft/entity/player/PlayerEntity;)Z",
-        constant = {
-            @Constant(doubleValue = 64.0D)
-        }
-    )
-    private static double modifyReachDistance(double value, PlayerEntity player) {
-        return ReachEntityAttributes.getSquaredReachDistance(player, value);
+        require = 1, allow = 1, constant = @Constant(doubleValue = 64.0))
+    private static double getActualReachDistance(final double reachDistance, final PlayerEntity player) {
+        return ReachEntityAttributes.getSquaredReachDistance(player, reachDistance);
     }
 }

@@ -7,12 +7,11 @@ import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
 @Mixin(ServerPlayerInteractionManager.class)
-public abstract class ServerPlayerInteractionManagerMixin {
+abstract class ServerPlayerInteractionManagerMixin {
     @ModifyConstant(
         method = "processBlockBreakingAction(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/network/packet/c2s/play/PlayerActionC2SPacket$Action;Lnet/minecraft/util/math/Direction;I)V",
-        constant = @Constant(doubleValue = 36.0D)
-    )
-    private double modifyReachDistance(double value) {
-        return ReachEntityAttributes.getSquaredReachDistance(((ServerPlayerInteractionManager) (Object) this).player, value);
+        require = 1, allow = 1, constant = @Constant(doubleValue = 36.0))
+    private double getActualReachDistance(final double reachDistance) {
+        return ReachEntityAttributes.getSquaredReachDistance(((ServerPlayerInteractionManager) (Object) this).player, reachDistance);
     }
 }

@@ -12,17 +12,17 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
-public abstract class LivingEntityMixin extends Entity {
-    public LivingEntityMixin(EntityType<?> entityType_1, World world_1) {
-        super(entityType_1, world_1);
+abstract class LivingEntityMixin extends Entity {
+    LivingEntityMixin(final EntityType<?> type, final World world) {
+        super(type, world);
     }
 
     @Inject(
         method = "createLivingAttributes()Lnet/minecraft/entity/attribute/DefaultAttributeContainer$Builder;",
-        at = @At("RETURN")
-    )
-    private static void initAttributes(CallbackInfoReturnable<DefaultAttributeContainer.Builder> ci) {
-        ci.getReturnValue().add(ReachEntityAttributes.REACH);
-        ci.getReturnValue().add(ReachEntityAttributes.ATTACK_RANGE);
+        require = 1, allow = 1, at = @At("RETURN"))
+    private static void addAttributes(final CallbackInfoReturnable<DefaultAttributeContainer.Builder> info) {
+        final DefaultAttributeContainer.Builder builder = info.getReturnValue();
+        builder.add(ReachEntityAttributes.REACH);
+        builder.add(ReachEntityAttributes.ATTACK_RANGE);
     }
 }

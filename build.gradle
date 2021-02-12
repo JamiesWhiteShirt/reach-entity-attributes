@@ -12,6 +12,7 @@ version = project.mod_version
 group = project.maven_group
 
 minecraft {
+    refmapName = "refmap.reach-entity-attributes.json"
 }
 
 dependencies {

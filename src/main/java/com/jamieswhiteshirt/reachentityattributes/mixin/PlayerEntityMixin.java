@@ -10,16 +10,13 @@ import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
 @Mixin(PlayerEntity.class)
-public abstract class PlayerEntityMixin extends LivingEntity {
-    protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType_1, World world_1) {
-        super(entityType_1, world_1);
+abstract class PlayerEntityMixin extends LivingEntity {
+    PlayerEntityMixin(final EntityType<? extends LivingEntity> type, final World world) {
+        super(type, world);
     }
 
-    @ModifyConstant(
-        method = "attack(Lnet/minecraft/entity/Entity;)V",
-        constant = @Constant(doubleValue = 9.0D)
-    )
-    private double modifyAttackRange(double value) {
-        return ReachEntityAttributes.getSquaredAttackRange(this, value);
+    @ModifyConstant(method = "attack(Lnet/minecraft/entity/Entity;)V", constant = @Constant(doubleValue = 9.0))
+    private double getActualAttackRange(final double attackRange) {
+        return ReachEntityAttributes.getSquaredAttackRange(this, attackRange);
     }
 }

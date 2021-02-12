@@ -9,15 +9,12 @@ import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
 @Mixin(ScreenHandler.class)
-public abstract class ScreenHandlerMixin {
+abstract class ScreenHandlerMixin {
+    @SuppressWarnings("UnresolvedMixinReference") // Synthetic
     @ModifyConstant(
-        //private static synthetic method_17696(Block,PlayerEntity,World,BlockPos)Boolean
-        method = "method_17696",
-        constant = {
-            @Constant(doubleValue = 64.0D)
-        }
-    )
-    private static double modifyReachDistance(double value, Block block, PlayerEntity player) {
-        return ReachEntityAttributes.getSquaredReachDistance(player, value);
+        method = "method_17696(Lnet/minecraft/block/Block;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)Ljava/lang/Boolean;",
+        require = 1, allow = 1, constant = @Constant(doubleValue = 64.0))
+    private static double getActualReachDistance(final double reachDistance, final Block block, final PlayerEntity player) {
+        return ReachEntityAttributes.getSquaredReachDistance(player, reachDistance);
     }
 }

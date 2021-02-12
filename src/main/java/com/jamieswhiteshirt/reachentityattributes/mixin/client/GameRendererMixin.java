@@ -10,30 +10,29 @@ import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
 @Mixin(GameRenderer.class)
-public abstract class GameRendererMixin {
+abstract class GameRendererMixin {
     @Shadow @Final private MinecraftClient client;
 
     @ModifyConstant(
         method = "updateTargetedEntity(F)V",
-        constant = @Constant(doubleValue = 6.0D)
-    )
-    private double modifyReachDistance(double value) {
-        return ReachEntityAttributes.getReachDistance(client.player, value);
+        require = 1, allow = 1, constant = @Constant(doubleValue = 6.0))
+    private double getActualReachDistance(final double reachDistance) {
+        if (this.client.player != null) {
+            return ReachEntityAttributes.getReachDistance(this.client.player, reachDistance);
+        }
+        return reachDistance;
     }
 
-    @ModifyConstant(
-        method = "updateTargetedEntity(F)V",
-        constant = @Constant(doubleValue = 3.0D)
-    )
-    private double modifyAttackRange(double value) {
-        return ReachEntityAttributes.getAttackRange(client.player, value);
+    @ModifyConstant(method = "updateTargetedEntity(F)V", constant = @Constant(doubleValue = 3.0D))
+    private double getActualAttackRange0(final double attackRange) {
+        if (this.client.player != null) {
+            return ReachEntityAttributes.getAttackRange(this.client.player, attackRange);
+        }
+        return attackRange;
     }
 
-    @ModifyConstant(
-        method = "updateTargetedEntity(F)V",
-        constant = @Constant(doubleValue = 9.0D)
-    )
-    private double modifyAttackRange2(double value) {
-        return ReachEntityAttributes.getSquaredAttackRange(client.player, value);
+    @ModifyConstant(method = "updateTargetedEntity(F)V", constant = @Constant(doubleValue = 9.0D))
+    private double getActualAttackRange1(final double attackRange) {
+        return ReachEntityAttributes.getSquaredAttackRange(this.client.player, attackRange);
     }
 }
