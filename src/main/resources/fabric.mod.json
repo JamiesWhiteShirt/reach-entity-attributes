@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "reach-entity-attributes",
   "version": "${version}",
-  "name": "Reach Entity Attribute",
+  "name": "Reach Entity Attributes",
   "description": "Implements entity attributes for reach distance and attack range",
   "authors": [
     "JamiesWhiteShirt",
