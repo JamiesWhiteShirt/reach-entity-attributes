@@ -12,6 +12,7 @@
     "EnderChestBlockEntityMixin",
     "ForgingScreenHandlerMixin",
     "InventoryValidationMixin",
+    "ItemMixin",
     "LivingEntityMixin",
     "PlayerEntityMixin",
     "ScreenHandlerMixin",
