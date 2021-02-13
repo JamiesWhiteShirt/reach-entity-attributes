@@ -4,7 +4,6 @@ import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.block.entity.LockableContainerBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
@@ -24,13 +23,16 @@ abstract class ChestBlockEntityMixin {
             shift = Shift.BEFORE, value = "INVOKE", opcode = Opcodes.INVOKEVIRTUAL,
             target = "Ljava/util/List;iterator()Ljava/util/Iterator;"))
     private static List<PlayerEntity> getPlayersAccountingForReach(final List<PlayerEntity> players, final World world, final LockableContainerBlockEntity inventory, final int x, final int y, final int z) {
-        final List<PlayerEntity> actualPlayers = new ArrayList<>(0);
+        final List<PlayerEntity> playersWithinReach = new ArrayList<>(0);
         for (final PlayerEntity player : world.getPlayers()) {
-            final double r = ReachEntityAttributes.getReachDistance(player, 5.0);
-            if (player.getBoundingBox().intersects(new Box(x - r, y - r, z - r, x + r, y + r, z + r))) {
-                actualPlayers.add(player);
+            final double reach = ReachEntityAttributes.getSquaredReachDistance(player, 5.0);
+            final double dx = (x + 0.5) - player.getX();
+            final double dy = (y + 0.5) - player.getEyeY();
+            final double dz = (z + 0.5) - player.getZ();
+            if (((dx * dx) + (dy * dy) + (dz * dz)) <= reach) {
+                playersWithinReach.add(player);
             }
         }
-        return actualPlayers;
+        return playersWithinReach;
     }
 }
