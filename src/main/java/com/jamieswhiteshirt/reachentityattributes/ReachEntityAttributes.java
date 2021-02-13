@@ -1,5 +1,6 @@
 package com.jamieswhiteshirt.reachentityattributes;
 
+import net.fabricmc.api.ModInitializer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.ClampedEntityAttribute;
 import net.minecraft.entity.attribute.EntityAttribute;
@@ -11,14 +12,11 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public final class ReachEntityAttributes {
+public final class ReachEntityAttributes implements ModInitializer {
     public static final String MOD_ID = "reach-entity-attributes";
 
     public static final EntityAttribute REACH = make("reach", 0.0, -1024.0, 1024.0);
     public static final EntityAttribute ATTACK_RANGE = make("attack_range", 0.0, -1024.0, 1024.0);
-
-    private ReachEntityAttributes() {
-    }
 
     public static double getReachDistance(final LivingEntity entity, final double baseReachDistance) {
         @Nullable final EntityAttributeInstance reachDistance = entity.getAttributeInstance(REACH);
@@ -41,8 +39,12 @@ public final class ReachEntityAttributes {
     }
 
     private static EntityAttribute make(final String name, final double base, final double min, final double max) {
-        return Registry.register(Registry.ATTRIBUTE, new Identifier(MOD_ID, name), new ClampedEntityAttribute(
-            "attribute.name.generic." + MOD_ID + '.' + name, base, min, max
-        ).setTracked(true));
+        return new ClampedEntityAttribute("attribute.name.generic." + MOD_ID + '.' + name, base, min, max).setTracked(true);
+    }
+
+    @Override
+    public void onInitialize() {
+        Registry.register(Registry.ATTRIBUTE, new Identifier(MOD_ID, "reach"), REACH);
+        Registry.register(Registry.ATTRIBUTE, new Identifier(MOD_ID, "attack_range"), ATTACK_RANGE);
     }
 }
