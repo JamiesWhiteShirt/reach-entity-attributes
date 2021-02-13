@@ -1,6 +1,7 @@
 package com.jamieswhiteshirt.reachentityattributes.mixin;
 
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
+import net.minecraft.network.listener.ServerPlayPacketListener;
 import net.minecraft.network.packet.c2s.play.PlayerInteractEntityC2SPacket;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -10,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
 @Mixin(ServerPlayNetworkHandler.class)
-abstract class ServerPlayNetworkHandlerMixin {
+abstract class ServerPlayNetworkHandlerMixin implements ServerPlayPacketListener {
     @Shadow public ServerPlayerEntity player;
 
     @ModifyConstant(
