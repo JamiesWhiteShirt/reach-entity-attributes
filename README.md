@@ -1,33 +1,39 @@
 # Reach Entity Attributes
 [![Maven Repository](https://img.shields.io/maven-metadata/v/https/maven.jamieswhiteshirt.com/libs-release/com/jamieswhiteshirt/reach-entity-attributes/maven-metadata.xml.svg)](https://maven.jamieswhiteshirt.com/libs-release/com/jamieswhiteshirt/reach-entity-attributes/)
 
-Library of entity attributes for armor, tools, potions, etc. to increase or decrease reach distance and attack range.
+**A library mod for Minecraft that implements entity attributes for reach distance and attack range**
 
 ## Usage
 
-To use and include this mod in your project, add the following to your `build.gradle`:
+### Setup
+To use and include this mod in your project, add the following to your buildscript:
 
 ```groovy
 repositories {
-    maven {url "https://maven.jamieswhiteshirt.com/libs-release/"}
+    maven {
+        url "https://maven.jamieswhiteshirt.com/libs-release"
+        content {
+            includeGroup "com.jamieswhiteshirt"
+        }
+    }
 }
 
 dependencies {
-    modImplementation "com.jamieswhiteshirt:reach-entity-attributes:$VERSION"
-    include "com.jamieswhiteshirt:reach-entity-attributes:$VERSION"
+    include modImplementation("com.jamieswhiteshirt:reach-entity-attributes:$VERSION")
 }
 ```
 
-## Features
+### API
 
 ### `com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes.REACH`
-Used to modify the range for breaking and interacting with blocks. 4.5 (survival) or 5.0 (creative) by default. The attribute adds to the base value.
+Represents the reach distance modifier of an entity that is added to the base value. In vanilla, the base values are 4.5 for survival and 5.0 for creative.
 
 ### `com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes.ATTACK_RANGE`
-Used to modify the range for attacking and interacting with entities. 3.0 (survival) or 6.0 (creative) by default. The attribute adds to the base value.
+Represents the attack range modifier of an entity that is added to the base value. In vanilla, the base values are 3.0 for survival and 6.0 for creative.
 
-The player's reach is typically greater than their attack range. Any attack range beyond the player's reach will be ineffective.
+A player's reach is typically greater than their attack range. Any attack range beyond the player's reach will be ineffective.
 
-## Developing Reach Entity Attributes
+---
+## Development
 
 To get started, refer to the [Fabric documentation](https://fabricmc.net/wiki/tutorial:setup).
