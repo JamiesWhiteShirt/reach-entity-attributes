@@ -12,6 +12,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public final class ReachEntityAttributes {
+    public static final String MOD_ID = "reach-entity-attributes";
+
     public static final EntityAttribute REACH = make("reach", 0.0, -1024.0, 1024.0);
     public static final EntityAttribute ATTACK_RANGE = make("attack_range", 0.0, -1024.0, 1024.0);
 
@@ -39,9 +41,8 @@ public final class ReachEntityAttributes {
     }
 
     private static EntityAttribute make(final String name, final double base, final double min, final double max) {
-        final Identifier id = new Identifier("reach-entity-attributes", name);
-        final String key = "attribute.name.generic.reach-entity-attributes." + name;
-        final EntityAttribute attribute = new ClampedEntityAttribute(key, base, min, max).setTracked(true);
-        return Registry.register(Registry.ATTRIBUTE, id, attribute);
+        return Registry.register(Registry.ATTRIBUTE, new Identifier(MOD_ID, name), new ClampedEntityAttribute(
+            "attribute.name.generic." + MOD_ID + '.' + name, base, min, max
+        ).setTracked(true));
     }
 }
