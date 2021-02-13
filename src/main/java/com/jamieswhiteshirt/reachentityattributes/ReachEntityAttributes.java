@@ -18,23 +18,23 @@ public final class ReachEntityAttributes {
     private ReachEntityAttributes() {
     }
 
-    public static double getReachDistance(final LivingEntity entity, final double baseValue) {
-        @Nullable final EntityAttributeInstance reach = entity.getAttributeInstance(REACH);
-        return (reach != null) ? (baseValue + reach.getValue()) : baseValue;
+    public static double getReachDistance(final LivingEntity entity, final double baseReachDistance) {
+        @Nullable final EntityAttributeInstance reachDistance = entity.getAttributeInstance(REACH);
+        return (reachDistance != null) ? (baseReachDistance + reachDistance.getValue()) : baseReachDistance;
     }
 
-    public static double getSquaredReachDistance(final LivingEntity entity, final double squaredBaseValue) {
-        final double reachDistance = getReachDistance(entity, Math.sqrt(squaredBaseValue));
+    public static double getSquaredReachDistance(final LivingEntity entity, final double sqBaseReachDistance) {
+        final double reachDistance = getReachDistance(entity, Math.sqrt(sqBaseReachDistance));
         return reachDistance * reachDistance;
     }
 
-    public static double getAttackRange(final LivingEntity entity, final double baseValue) {
-        @Nullable final EntityAttributeInstance range = entity.getAttributeInstance(ATTACK_RANGE);
-        return (range != null) ? (baseValue + range.getValue()) : baseValue;
+    public static double getAttackRange(final LivingEntity entity, final double baseAttackRange) {
+        @Nullable final EntityAttributeInstance attackRange = entity.getAttributeInstance(ATTACK_RANGE);
+        return (attackRange != null) ? (baseAttackRange + attackRange.getValue()) : baseAttackRange;
     }
 
-    public static double getSquaredAttackRange(final LivingEntity entity, final double squaredBaseValue) {
-        final double attackRange = getAttackRange(entity, Math.sqrt(squaredBaseValue));
+    public static double getSquaredAttackRange(final LivingEntity entity, final double sqBaseAttackRange) {
+        final double attackRange = getAttackRange(entity, Math.sqrt(sqBaseAttackRange));
         return attackRange * attackRange;
     }
 
