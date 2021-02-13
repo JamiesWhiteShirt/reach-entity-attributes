@@ -33,6 +33,9 @@ abstract class GameRendererMixin {
 
     @ModifyConstant(method = "updateTargetedEntity(F)V", constant = @Constant(doubleValue = 9.0D))
     private double getActualAttackRange1(final double attackRange) {
-        return ReachEntityAttributes.getSquaredAttackRange(this.client.player, attackRange);
+        if (this.client.player != null) {
+            return ReachEntityAttributes.getSquaredAttackRange(this.client.player, attackRange);
+        }
+        return attackRange;
     }
 }
