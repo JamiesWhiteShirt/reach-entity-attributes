@@ -5,6 +5,9 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.ClampedEntityAttribute;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -14,6 +17,7 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 @ParametersAreNonnullByDefault
 public final class ReachEntityAttributes implements ModInitializer {
@@ -43,14 +47,20 @@ public final class ReachEntityAttributes implements ModInitializer {
     }
 
     public static List<PlayerEntity> getPlayersWithinReach(final World world, final int x, final int y, final int z, final double baseReachDistance) {
+        return getPlayersWithinReach(player -> true, world, x, y, z, baseReachDistance);
+    }
+
+    public static List<PlayerEntity> getPlayersWithinReach(final Predicate<PlayerEntity> viewerPredicate, final World world, final int x, final int y, final int z, final double baseReachDistance) {
         final List<PlayerEntity> playersWithinReach = new ArrayList<>(0);
         for (final PlayerEntity player : world.getPlayers()) {
-            final double reach = getSquaredReachDistance(player, baseReachDistance);
-            final double dx = (x + 0.5) - player.getX();
-            final double dy = (y + 0.5) - player.getEyeY();
-            final double dz = (z + 0.5) - player.getZ();
-            if (((dx * dx) + (dy * dy) + (dz * dz)) <= reach) {
-                playersWithinReach.add(player);
+            if (viewerPredicate.test(player)) {
+                final double reach = getSquaredReachDistance(player, baseReachDistance);
+                final double dx = (x + 0.5) - player.getX();
+                final double dy = (y + 0.5) - player.getEyeY();
+                final double dz = (z + 0.5) - player.getZ();
+                if (((dx * dx) + (dy * dy) + (dz * dz)) <= reach) {
+                    playersWithinReach.add(player);
+                }
             }
         }
         return playersWithinReach;
