@@ -45,11 +45,11 @@ public final class ReachEntityAttributes implements ModInitializer {
     public static List<PlayerEntity> getPlayersWithinReach(final World world, final int x, final int y, final int z, final double baseReachDistance) {
         final List<PlayerEntity> playersWithinReach = new ArrayList<>(0);
         for (final PlayerEntity player : world.getPlayers()) {
-            final double reach = getSquaredReachDistance(player, baseReachDistance);
+            final double reach = getReachDistance(player, baseReachDistance);
             final double dx = (x + 0.5) - player.getX();
             final double dy = (y + 0.5) - player.getEyeY();
             final double dz = (z + 0.5) - player.getZ();
-            if (((dx * dx) + (dy * dy) + (dz * dz)) <= reach) {
+            if (((dx * dx) + (dy * dy) + (dz * dz)) <= (reach * reach)) {
                 playersWithinReach.add(player);
             }
         }
