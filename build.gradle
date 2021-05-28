@@ -1,29 +1,22 @@
 plugins {
-    id 'fabric-loom' version '0.2.6-SNAPSHOT'
+    id 'fabric-loom' version '0.8-SNAPSHOT'
     id "maven-publish"
     id "signing"
 }
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_16
+targetCompatibility = JavaVersion.VERSION_16
 
 archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
-
-minecraft {
-    refmapName = "refmap.reach-entity-attributes.json"
-}
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    modImplementation("net.fabricmc.fabric-api:fabric-resource-loader-v0:${project.resource_loader_version}") {
-        transitive false
-    }
-
+    modImplementation fabricApi.module("fabric-resource-loader-v0", project.fabric_version)
     implementation("com.google.code.findbugs:jsr305:${project.jsr305_version}") {
         transitive false
     }
@@ -32,13 +25,8 @@ dependencies {
 processResources {
     inputs.property "version", project.version
 
-    from(sourceSets.main.resources.srcDirs) {
-        include "fabric.mod.json"
+    filesMatching("fabric.mod.json") {
         expand "version": project.version
-    }
-
-    from(sourceSets.main.resources.srcDirs) {
-        exclude "fabric.mod.json"
     }
 }
 
