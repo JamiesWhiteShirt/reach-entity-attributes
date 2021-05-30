@@ -19,5 +19,6 @@
     "ServerPlayerInteractionManagerMixin",
     "ServerPlayNetworkHandlerAttackMixin",
     "ServerPlayNetworkHandlerMixin"
-  ]
+  ],
+  "refmap": "refmap.reach-entity-attributes.json"
 }
