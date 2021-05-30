@@ -12,18 +12,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(targets = "net.minecraft.server.network.ServerPlayNetworkHandler$1")
 public class ServerPlayNetworkHandlerAttackMixin {
-    @SuppressWarnings("ShadowTarget")   // synthetic field "ServerPlayNetworkHandler.this"
-    @Shadow
-    @Final
-    private ServerPlayNetworkHandler field_28963;
-    @SuppressWarnings("ShadowTarget")   // synthetic field "entity"
-    @Shadow
-    @Final
-    private Entity field_28962;
+    @Shadow(aliases = "field_28963") @Final private ServerPlayNetworkHandler networkHandler;
+    @Shadow(aliases = "field_28962") @Final private Entity entity;
 
     @Inject(method = "attack", at = @At("HEAD"), cancellable = true)
     private void cancelIfTooFar(CallbackInfo ci) {
-        if (this.field_28963.player.squaredDistanceTo(this.field_28962) > ReachEntityAttributes.getSquaredAttackRange(this.field_28963.player, 64)) {
+        if (ReachEntityAttributes.isOutsideOfAttackRange(this.networkHandler.player, this.entity)) {
             ci.cancel();
         }
     }

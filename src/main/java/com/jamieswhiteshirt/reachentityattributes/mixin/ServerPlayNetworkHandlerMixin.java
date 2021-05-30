@@ -19,11 +19,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 abstract class ServerPlayNetworkHandlerMixin implements ServerPlayPacketListener {
     @Shadow public ServerPlayerEntity player;
 
+    /**
+     * Prevents players from interacting with entities that are too far away.
+     *
+     * <p>Attack range is further checked in {@link ServerPlayNetworkHandlerAttackMixin}.
+     */
     @ModifyConstant(
         method = "onPlayerInteractEntity(Lnet/minecraft/network/packet/c2s/play/PlayerInteractEntityC2SPacket;)V",
         require = 2, allow = 2, constant = @Constant(doubleValue = 36.0))
     private double getActualAttackRange(final double attackRange, final PlayerInteractEntityC2SPacket packet) {
-        // Attack range is further checked in the anonymous class mixin
         return ReachEntityAttributes.getSquaredReachDistance(this.player, attackRange);
     }
 
