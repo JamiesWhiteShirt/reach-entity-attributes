@@ -21,8 +21,6 @@ abstract class LivingEntityMixin extends Entity {
         method = "createLivingAttributes()Lnet/minecraft/entity/attribute/DefaultAttributeContainer$Builder;",
         require = 1, allow = 1, at = @At("RETURN"))
     private static void addAttributes(final CallbackInfoReturnable<DefaultAttributeContainer.Builder> info) {
-        final DefaultAttributeContainer.Builder builder = info.getReturnValue();
-        builder.add(ReachEntityAttributes.REACH);
-        builder.add(ReachEntityAttributes.ATTACK_RANGE);
+        info.getReturnValue().add(ReachEntityAttributes.REACH).add(ReachEntityAttributes.ATTACK_RANGE);
     }
 }
