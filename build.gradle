@@ -15,6 +15,16 @@ java {
 
 loom {
     refmapName = "refmap.reach-entity-attributes.json"
+    runs {
+        configureEach {
+            vmArg "-Dmixin.debug=true"
+            vmArg "-Dmixin.debug.export.decompile=false"
+            vmArg "-Dmixin.debug.verbose=true"
+            vmArg "-Dmixin.dumpTargetOnFailure=true"
+            vmArg "-Dmixin.checks=true"
+            vmArg "-Dmixin.hotSwap=true"
+        }
+    }
 }
 
 dependencies {
