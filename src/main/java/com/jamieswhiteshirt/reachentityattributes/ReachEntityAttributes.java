@@ -1,13 +1,11 @@
 package com.jamieswhiteshirt.reachentityattributes;
 
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.ClampedEntityAttribute;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffectType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -44,6 +42,10 @@ public final class ReachEntityAttributes implements ModInitializer {
     public static double getSquaredAttackRange(final LivingEntity entity, final double sqBaseAttackRange) {
         final double attackRange = getAttackRange(entity, Math.sqrt(sqBaseAttackRange));
         return attackRange * attackRange;
+    }
+
+    public static boolean isOutsideOfAttackRange(final PlayerEntity player, final Entity entity) {
+        return player.squaredDistanceTo(entity) > getSquaredAttackRange(player, 64.0);
     }
 
     public static List<PlayerEntity> getPlayersWithinReach(final World world, final int x, final int y, final int z, final double baseReachDistance) {

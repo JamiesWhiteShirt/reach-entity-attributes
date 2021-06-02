@@ -1,6 +1,6 @@
 {
   "minVersion": "0.8",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_16",
   "required": true,
   "package": "com.jamieswhiteshirt.reachentityattributes.mixin",
   "client": [
@@ -16,8 +16,9 @@
     "LivingEntityMixin",
     "PlayerEntityMixin",
     "ScreenHandlerMixin",
-    "ServerPlayNetworkHandlerMixin",
-    "ServerPlayerInteractionManagerMixin"
+    "ServerPlayerInteractionManagerMixin",
+    "ServerPlayNetworkHandlerAttackMixin",
+    "ServerPlayNetworkHandlerMixin"
   ],
   "refmap": "refmap.reach-entity-attributes.json"
 }

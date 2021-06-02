@@ -3,7 +3,7 @@ package com.jamieswhiteshirt.reachentityattributes.mixin.client;
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.GameRenderer;
-import net.minecraft.resource.SynchronousResourceReloadListener;
+import net.minecraft.resource.SynchronousResourceReloader;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
 @Mixin(GameRenderer.class)
-abstract class GameRendererMixin implements SynchronousResourceReloadListener/*, AutoCloseable*/ {
+abstract class GameRendererMixin implements SynchronousResourceReloader/*, AutoCloseable*/ {
     @Shadow @Final private MinecraftClient client;
 
     @ModifyConstant(
