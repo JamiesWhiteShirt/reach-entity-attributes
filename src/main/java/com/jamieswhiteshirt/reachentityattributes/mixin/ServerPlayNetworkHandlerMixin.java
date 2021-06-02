@@ -17,7 +17,7 @@ abstract class ServerPlayNetworkHandlerMixin implements ServerPlayPacketListener
     /**
      * Prevents players from interacting with entities that are too far away.
      *
-     * <p>Attack range is further checked in {@link ServerPlayNetworkHandlerAttackMixin}.
+     * <p>Attack range is further checked in {@link PlayerEntityInteractionHandlerMixin}.
      */
     @ModifyConstant(
         method = "onPlayerInteractEntity(Lnet/minecraft/network/packet/c2s/play/PlayerInteractEntityC2SPacket;)V",

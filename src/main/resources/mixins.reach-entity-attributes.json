@@ -14,10 +14,10 @@
     "InventoryValidationMixin",
     "ItemMixin",
     "LivingEntityMixin",
+    "PlayerEntityInteractionHandlerMixin",
     "PlayerEntityMixin",
     "ScreenHandlerMixin",
     "ServerPlayerInteractionManagerMixin",
-    "ServerPlayNetworkHandlerAttackMixin",
     "ServerPlayNetworkHandlerMixin"
   ],
   "refmap": "refmap.reach-entity-attributes.json"
