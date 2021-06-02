@@ -16,7 +16,7 @@ public class ServerPlayNetworkHandlerAttackMixin {
     @Shadow(aliases = "field_28962") @Final private Entity entity;
 
     @Inject(method = "attack", at = @At("HEAD"), cancellable = true)
-    private void cancelIfTooFar(CallbackInfo ci) {
+    private void ensureWithinAttackRange(final CallbackInfo ci) {
         if (ReachEntityAttributes.isOutsideOfAttackRange(this.networkHandler.player, this.entity)) {
             ci.cancel();
         }

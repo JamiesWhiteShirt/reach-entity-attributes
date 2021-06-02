@@ -44,8 +44,8 @@ public final class ReachEntityAttributes implements ModInitializer {
         return attackRange * attackRange;
     }
 
-    public static boolean isOutsideOfAttackRange(PlayerEntity player, Entity entity) {
-        return player.squaredDistanceTo(entity) > getSquaredAttackRange(player, 64);
+    public static boolean isOutsideOfAttackRange(final PlayerEntity player, final Entity entity) {
+        return player.squaredDistanceTo(entity) > getSquaredAttackRange(player, 64.0);
     }
 
     public static List<PlayerEntity> getPlayersWithinReach(final World world, final int x, final int y, final int z, final double baseReachDistance) {
