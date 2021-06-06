@@ -1,5 +1,9 @@
+import org.gradle.util.GradleVersion
+import java.time.Instant
+
 plugins {
     id "fabric-loom" version "0.8.17"
+    id "net.nemerosa.versioning" version "be24b23"
     id "maven-publish"
     id "signing"
 }
@@ -56,6 +60,29 @@ processResources {
 
 jar {
     from "/LICENSE"
+    manifest.attributes([
+      "Build-Timestamp": Instant.now(),
+      "Build-Revision": versioning.info.commit,
+      "Build-Jvm": "" +
+        "${System.getProperty("java.version")} (" +
+        "${System.getProperty("java.vm.vendor")} " +
+        "${System.getProperty("java.vm.version")})",
+      "Built-By": GradleVersion.current(),
+
+      "Implementation-Title": project.name,
+      "Implementation-Version": project.version,
+      "Implementation-Vendor": project.group,
+
+      "Specification-Title": "FabricMod",
+      "Specification-Version": "1.0.0",
+      "Specification-Vendor": "dev.sapphic",
+
+      "Sealed": "true"
+    ])
+}
+
+assemble {
+    dependsOn versionFile
 }
 
 publishing {
