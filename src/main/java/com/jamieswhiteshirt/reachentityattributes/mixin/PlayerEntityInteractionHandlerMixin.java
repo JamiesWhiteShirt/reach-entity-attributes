@@ -13,12 +13,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(targets = "net.minecraft.server.network.ServerPlayNetworkHandler$1")
 abstract class PlayerEntityInteractionHandlerMixin implements PlayerInteractEntityC2SPacket.Handler {
-    @Shadow(aliases = "field_28963") @Final private ServerPlayNetworkHandler networkHandler;
-    @Shadow(aliases = "field_28962") @Final private Entity entity;
+    @Shadow(aliases = "field_28963") @Final private ServerPlayNetworkHandler field_28963;
+    @Shadow(aliases = "field_28962") @Final private Entity field_28962;
 
     @Inject(method = "attack()V", at = @At("HEAD"), require = 1, allow = 1, cancellable = true)
     private void ensureWithinAttackRange(final CallbackInfo ci) {
-        if (!ReachEntityAttributes.isWithinAttackRange(this.networkHandler.player, this.entity)) {
+        if (!ReachEntityAttributes.isWithinAttackRange(this.field_28963.player, this.field_28962)) {
             ci.cancel();
         }
     }
