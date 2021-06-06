@@ -101,8 +101,8 @@ publishing {
         maven {
             url = "https://maven.jamieswhiteshirt.com/libs-" + (isReleaseVersion ? "release" : "snapshot")
             credentials {
-                username = properties.mavenUser
-                password = properties.mavenPassword
+                username = project.properties.mavenUser
+                password = project.properties.mavenPassword
             }
         }
     }
