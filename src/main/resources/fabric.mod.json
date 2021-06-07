@@ -28,6 +28,10 @@
     "fabric-resource-loader-v0": ">=0.4.7"
   },
   "custom": {
-    "modmenu:api": true
+    "modmenu": {
+      "badges": [
+        "library"
+      ]
+    }
   }
 }
