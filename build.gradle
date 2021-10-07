@@ -2,8 +2,8 @@ import org.gradle.util.GradleVersion
 import java.time.Instant
 
 plugins {
-    id "fabric-loom" version "0.8.17"
-    id "net.nemerosa.versioning" version "be24b23"
+    id "fabric-loom" version "0.9.54"
+    id "net.nemerosa.versioning" version "2.15.0"
     id "maven-publish"
     id "signing"
 }
@@ -18,15 +18,17 @@ java {
 }
 
 loom {
-    refmapName = "refmap.reach-entity-attributes.json"
+    mixin {
+        defaultRefmapName.set("refmap.reach-entity-attributes.json")
+    }
     runs {
         configureEach {
-            vmArg "-Dmixin.debug=true"
-            vmArg "-Dmixin.debug.export.decompile=false"
-            vmArg "-Dmixin.debug.verbose=true"
-            vmArg "-Dmixin.dumpTargetOnFailure=true"
-            vmArg "-Dmixin.checks=true"
-            vmArg "-Dmixin.hotSwap=true"
+            property "mixin.debug", "true"
+            property "mixin.debug.export.decompile", "false"
+            property "mixin.debug.verbose", "true"
+            property "mixin.dumpTargetOnFailure", "true"
+            property "mixin.checks", "true"
+            property "mixin.hotSwap", "true"
         }
     }
 }

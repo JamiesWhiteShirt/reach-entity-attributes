@@ -1,0 +1,20 @@
+*               text=auto
+*.bat           text eol=crlf
+*.jar           binary
+*.java          text diff=java
+*.json          text
+*.kt            text diff=java
+*.mcmeta        text
+*.md            text
+*.ogg           binary
+*.png           binary
+*.properties    text
+*.sh            text eol=lf
+.gitattributes  export-ignore
+.gitignore      export-ignore
+CHANGES         text
+CONTRIBUTING    text
+LICENSE         text
+README          text
+gradlew         binary
+gradlew.bat     binary
