@@ -15,7 +15,6 @@ abstract class ForgingScreenHandlerMixin extends ScreenHandler {
         super(type, id);
     }
 
-    @SuppressWarnings("UnresolvedMixinReference") // Synthetic
     @ModifyConstant(
         method = "method_24924(Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)Ljava/lang/Boolean;",
         require = 1, allow = 1, constant = @Constant(doubleValue = 64.0))

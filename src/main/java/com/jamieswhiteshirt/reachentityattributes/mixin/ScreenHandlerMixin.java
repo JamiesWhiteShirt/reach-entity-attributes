@@ -10,7 +10,6 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
 @Mixin(ScreenHandler.class)
 abstract class ScreenHandlerMixin {
-    @SuppressWarnings("UnresolvedMixinReference") // Synthetic
     @ModifyConstant(
         method = "method_17696(Lnet/minecraft/block/Block;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)Ljava/lang/Boolean;",
         require = 1, allow = 1, constant = @Constant(doubleValue = 64.0))
