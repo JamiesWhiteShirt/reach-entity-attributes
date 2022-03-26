@@ -84,10 +84,6 @@ jar {
     ])
 }
 
-assemble {
-    dependsOn versionFile
-}
-
 publishing {
     publications {
         mavenJava(MavenPublication) {
