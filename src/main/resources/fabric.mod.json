@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "reach-entity-attributes",
-  "version": "${version}",
+  "version": "$version",
   "name": "Reach Entity Attributes",
   "description": "Implements entity attributes for reach distance and attack range",
   "authors": [
@@ -9,7 +9,8 @@
     "Chloe Dawn"
   ],
   "contact": {
-    "sources": "https://github.com/JamiesWhiteShirt/reach-entity-attribute",
+    "homepage": "https://github.com/JamiesWhiteShirt/reach-entity-attribute",
+    "sources": "https://github.com/JamiesWhiteShirt/reach-entity-attribute/tree/$version",
     "issues": "https://github.com/JamiesWhiteShirt/reach-entity-attribute/issues"
   },
   "license": "MIT",
