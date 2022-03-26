@@ -25,6 +25,7 @@
   "depends": {
     "minecraft": ">=1.17-beta.1",
     "fabricloader": ">=0.11.3",
+    "fabric-registry-sync-v0": ">=0.9.8",
     "fabric-resource-loader-v0": ">=0.4.7"
   },
   "custom": {
