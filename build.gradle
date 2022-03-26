@@ -46,7 +46,7 @@ dependencies {
 
 compileJava {
     options.with {
-        it.release.set(16)
+        it.release.set(17)
         it.fork = true
         it.deprecation = true
         it.encoding = "UTF-8"
