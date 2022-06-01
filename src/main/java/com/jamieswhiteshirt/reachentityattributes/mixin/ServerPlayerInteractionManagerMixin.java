@@ -6,17 +6,15 @@ import net.minecraft.server.network.ServerPlayerInteractionManager;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.Constant;
-import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(ServerPlayerInteractionManager.class)
 abstract class ServerPlayerInteractionManagerMixin {
     @Shadow @Final protected ServerPlayerEntity player;
 
-    @ModifyConstant(
-        method = "processBlockBreakingAction(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/network/packet/c2s/play/PlayerActionC2SPacket$Action;Lnet/minecraft/util/math/Direction;I)V",
-        require = 1, allow = 1, constant = @Constant(doubleValue = 36.0))
-    private double getActualReachDistance(final double reachDistance) {
-        return ReachEntityAttributes.getSquaredReachDistance(this.player, reachDistance);
+    @ModifyVariable(method = "processBlockBreakingAction", at = @At("STORE"), ordinal = 3)
+    private double processBlockBreakingAction(double g) {
+        return g - ReachEntityAttributes.getSquaredReachDistance(this.player, 36.0f) + 36.0f;
     }
 }
