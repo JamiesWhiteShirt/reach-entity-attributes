@@ -13,6 +13,10 @@ version = mod_version
 
 final isReleaseVersion = !version.endsWith("-SNAPSHOT")
 
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
 java {
     withSourcesJar()
 }
@@ -41,6 +45,8 @@ dependencies {
     implementation("com.google.code.findbugs:jsr305:$jsr305_version") {
         transitive = false
     }
+    implementation("com.github.LlamaLad7:MixinExtras:0.0.10")
+    annotationProcessor("com.github.LlamaLad7:MixinExtras:0.0.10")
 }
 
 compileJava {
