@@ -1,6 +1,7 @@
 package com.jamieswhiteshirt.reachentityattributes.mixin;
 
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
+import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.network.ServerPlayerInteractionManager;
 import org.objectweb.asm.Opcodes;
@@ -20,6 +21,6 @@ abstract class ServerPlayerInteractionManagerMixin {
         method = "processBlockBreakingAction",
         at = @At(value = "FIELD", target = "Lnet/minecraft/server/network/ServerPlayNetworkHandler;MAX_BREAK_SQUARED_DISTANCE:D", opcode = Opcodes.GETSTATIC))
     private double getActualReachDistance() {
-        return ReachEntityAttributes.getSquaredReachDistance(this.player, 36.0);
+        return ReachEntityAttributes.getSquaredReachDistance(this.player, ServerPlayNetworkHandler.MAX_BREAK_SQUARED_DISTANCE);
     }
 }

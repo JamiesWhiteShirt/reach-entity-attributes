@@ -5,6 +5,7 @@ import net.minecraft.network.listener.ServerPlayPacketListener;
 import net.minecraft.network.packet.c2s.play.PlayerInteractEntityC2SPacket;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.network.ServerPlayerInteractionManager;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -27,7 +28,7 @@ abstract class ServerPlayNetworkHandlerMixin implements ServerPlayPacketListener
         at = @At(value = "FIELD", target = "Lnet/minecraft/server/network/ServerPlayNetworkHandler;MAX_BREAK_SQUARED_DISTANCE:D", opcode = Opcodes.GETSTATIC)
     )
     private double getActualAttackRange() {
-        return ReachEntityAttributes.getSquaredReachDistance(this.player, 36.0);
+        return ReachEntityAttributes.getSquaredReachDistance(this.player, ServerPlayNetworkHandler.MAX_BREAK_SQUARED_DISTANCE);
     }
 
     @Redirect(
@@ -35,7 +36,7 @@ abstract class ServerPlayNetworkHandlerMixin implements ServerPlayPacketListener
         at = @At(value = "FIELD", target = "Lnet/minecraft/server/network/ServerPlayNetworkHandler;MAX_BREAK_SQUARED_DISTANCE:D", opcode = Opcodes.GETSTATIC)
     )
     private double getActualReachDistance() {
-        return ReachEntityAttributes.getSquaredReachDistance(this.player, 36.0);//ReachEntityAttributes.getSquaredReachDistance(this.player, reachDistance);
+        return ReachEntityAttributes.getSquaredReachDistance(this.player, ServerPlayNetworkHandler.MAX_BREAK_SQUARED_DISTANCE);
     }
 
     @ModifyConstant(
