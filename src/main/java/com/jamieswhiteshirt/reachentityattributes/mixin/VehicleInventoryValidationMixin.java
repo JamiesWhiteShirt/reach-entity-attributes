@@ -1,33 +1,18 @@
 package com.jamieswhiteshirt.reachentityattributes.mixin;
 
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.vehicle.ChestBoatEntity;
-import net.minecraft.entity.vehicle.StorageMinecartEntity;
-import net.minecraft.world.World;
+import net.minecraft.entity.vehicle.VehicleInventory;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.Constant;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
-@Mixin(value = {
-    StorageMinecartEntity.class,
-    ChestBoatEntity.class
-})
-public abstract class VehicleInventoryValidationMixin extends Entity {
-
-    public VehicleInventoryValidationMixin(EntityType<?> entityType, World world) {
-        super(entityType, world);
-    }
-
-    @Inject(method = "canPlayerUse", at = @At("RETURN"), cancellable = true)
-    private void canPlayerUseWithActualReachDistance(PlayerEntity playerEntity, CallbackInfoReturnable<Boolean> cir) {
-        double reachDistance = ReachEntityAttributes.getReachDistance(playerEntity, 8.0);
-        boolean canUse = !isRemoved() && this.getPos().isInRange(playerEntity.getPos(), reachDistance);
-        if(canUse != cir.getReturnValue()) {
-            cir.setReturnValue(canUse);
-        }
+@Mixin(VehicleInventory.class)
+interface VehicleInventoryValidationMixin {
+    @ModifyConstant(
+        method = "canPlayerAccess",
+        require = 1, allow = 1, constant = @Constant(doubleValue = 8.0))
+    private static double getActualReachDistance(final double reachDistance, final PlayerEntity player) {
+        return ReachEntityAttributes.getReachDistance(player, reachDistance);
     }
 }
