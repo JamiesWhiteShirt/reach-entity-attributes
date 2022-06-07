@@ -18,7 +18,8 @@
     "PlayerEntityMixin",
     "ScreenHandlerMixin",
     "ServerPlayerInteractionManagerMixin",
-    "ServerPlayNetworkHandlerMixin"
+    "ServerPlayNetworkHandlerMixin",
+    "VehicleInventoryValidationMixin"
   ],
   "refmap": "refmap.reach-entity-attributes.json"
 }

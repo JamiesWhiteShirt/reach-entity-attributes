@@ -5,10 +5,13 @@ import net.minecraft.network.listener.ServerPlayPacketListener;
 import net.minecraft.network.packet.c2s.play.PlayerInteractEntityC2SPacket;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(ServerPlayNetworkHandler.class)
 abstract class ServerPlayNetworkHandlerMixin implements ServerPlayPacketListener {
@@ -19,11 +22,20 @@ abstract class ServerPlayNetworkHandlerMixin implements ServerPlayPacketListener
      *
      * <p>Attack range is further checked in {@link PlayerEntityInteractionHandlerMixin}.
      */
-    @ModifyConstant(
-        method = "onPlayerInteractEntity(Lnet/minecraft/network/packet/c2s/play/PlayerInteractEntityC2SPacket;)V",
-        require = 2, allow = 2, constant = @Constant(doubleValue = 36.0))
-    private double getActualAttackRange(final double attackRange, final PlayerInteractEntityC2SPacket packet) {
-        return ReachEntityAttributes.getSquaredReachDistance(this.player, attackRange);
+    @Redirect(
+        method = "onPlayerInteractEntity",
+        at = @At(value = "FIELD", target = "Lnet/minecraft/server/network/ServerPlayNetworkHandler;MAX_BREAK_SQUARED_DISTANCE:D", opcode = Opcodes.GETSTATIC)
+    )
+    private double getActualAttackRange() {
+        return ReachEntityAttributes.getSquaredReachDistance(this.player, 36.0);
+    }
+
+    @Redirect(
+        method = "onPlayerInteractBlock",
+        at = @At(value = "FIELD", target = "Lnet/minecraft/server/network/ServerPlayNetworkHandler;MAX_BREAK_SQUARED_DISTANCE:D", opcode = Opcodes.GETSTATIC)
+    )
+    private double getActualReachDistance() {
+        return ReachEntityAttributes.getSquaredReachDistance(this.player, 36.0);//ReachEntityAttributes.getSquaredReachDistance(this.player, reachDistance);
     }
 
     @ModifyConstant(

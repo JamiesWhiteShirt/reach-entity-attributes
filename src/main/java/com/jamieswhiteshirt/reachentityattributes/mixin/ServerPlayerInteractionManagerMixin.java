@@ -3,20 +3,23 @@ package com.jamieswhiteshirt.reachentityattributes.mixin;
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.network.ServerPlayerInteractionManager;
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(ServerPlayerInteractionManager.class)
 abstract class ServerPlayerInteractionManagerMixin {
     @Shadow @Final protected ServerPlayerEntity player;
 
-    @ModifyConstant(
-        method = "processBlockBreakingAction(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/network/packet/c2s/play/PlayerActionC2SPacket$Action;Lnet/minecraft/util/math/Direction;I)V",
-        require = 1, allow = 1, constant = @Constant(doubleValue = 36.0))
-    private double getActualReachDistance(final double reachDistance) {
-        return ReachEntityAttributes.getSquaredReachDistance(this.player, reachDistance);
+    @Redirect(
+        method = "processBlockBreakingAction",
+        at = @At(value = "FIELD", target = "Lnet/minecraft/server/network/ServerPlayNetworkHandler;MAX_BREAK_SQUARED_DISTANCE:D", opcode = Opcodes.GETSTATIC))
+    private double getActualReachDistance() {
+        return ReachEntityAttributes.getSquaredReachDistance(this.player, 36.0);
     }
 }
