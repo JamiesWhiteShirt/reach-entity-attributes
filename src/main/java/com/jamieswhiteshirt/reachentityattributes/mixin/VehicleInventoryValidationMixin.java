@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 @Mixin(VehicleInventory.class)
 interface VehicleInventoryValidationMixin {
     @ModifyConstant(
-        method = "canPlayerAccess",
+        method = "canPlayerAccess(Lnet/minecraft/entity/player/PlayerEntity;)Z",
         require = 1, allow = 1, constant = @Constant(doubleValue = 8.0))
     private static double getActualReachDistance(final double reachDistance, final PlayerEntity player) {
         return ReachEntityAttributes.getReachDistance(player, reachDistance);
