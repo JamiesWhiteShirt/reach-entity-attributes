@@ -17,8 +17,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
     AbstractFurnaceBlockEntity.class,
     BrewingStandBlockEntity.class,
     LootableContainerBlockEntity.class,
-    PlayerInventory.class,
-    StorageMinecartEntity.class
+    PlayerInventory.class
 }, targets = {
     "net.minecraft.block.entity.LecternBlockEntity$1"
 })
