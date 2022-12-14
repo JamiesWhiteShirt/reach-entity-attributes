@@ -6,8 +6,9 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.ClampedEntityAttribute;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -73,7 +74,7 @@ public final class ReachEntityAttributes implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        Registry.register(Registry.ATTRIBUTE, new Identifier(MOD_ID, "reach"), REACH);
-        Registry.register(Registry.ATTRIBUTE, new Identifier(MOD_ID, "attack_range"), ATTACK_RANGE);
+        Registry.register(Registries.ATTRIBUTE, new Identifier(MOD_ID, "reach"), REACH);
+        Registry.register(Registries.ATTRIBUTE, new Identifier(MOD_ID, "attack_range"), ATTACK_RANGE);
     }
 }
