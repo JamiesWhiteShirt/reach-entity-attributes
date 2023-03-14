@@ -45,8 +45,12 @@ public final class ReachEntityAttributes implements ModInitializer {
         return attackRange * attackRange;
     }
 
-    public static boolean isInInventoryValidationRange(final PlayerEntity player, final BlockPos pos, final int sqReachDistance) {
-        return player.squaredDistanceTo((double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5) <= ReachEntityAttributes.getSquaredReachDistance(player, sqReachDistance);
+    public static boolean isInInventoryValidationRange(final PlayerEntity player, final double sqBetweenDistance, final double sqReachDistance) {
+        return sqBetweenDistance <= getSquaredReachDistance(player, sqReachDistance);
+    }
+
+    public static double getInventoryValidationValue(final PlayerEntity player, final double sqBetweenDistance, final double sqReachDistance) {
+        return ReachEntityAttributes.isInInventoryValidationRange(player, sqBetweenDistance, sqReachDistance) ? Double.NEGATIVE_INFINITY : Double.POSITIVE_INFINITY;
     }
 
     public static List<PlayerEntity> getPlayersWithinReach(final World world, final int x, final int y, final int z, final double baseReachDistance) {

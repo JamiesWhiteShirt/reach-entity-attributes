@@ -6,15 +6,14 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Mixin(Inventory.class)
+@Mixin(value = Inventory.class, priority = 500)
 interface InventoryValidationMixin {
-    @Inject(
+    @Redirect(
         method = "canPlayerUse(Lnet/minecraft/block/entity/BlockEntity;Lnet/minecraft/entity/player/PlayerEntity;I)Z",
-        at = @At(value = "RETURN", ordinal = 2), require = 1, allow = 1, cancellable = true)
-    private static void getActualReachDistance(final BlockEntity blockEntity, final PlayerEntity player, final int reachDistance, CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue(ReachEntityAttributes.isInInventoryValidationRange(player, blockEntity.getPos(), reachDistance * reachDistance));
+        at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;squaredDistanceTo(DDD)D"), require = 1, allow = 1)
+    private static double getActualReachDistance(final PlayerEntity player, final double e, final double f, final double g, final BlockEntity blockEntity, final PlayerEntity ignoredPlayer, int reachDistance) {
+        return ReachEntityAttributes.getInventoryValidationValue(player, player.squaredDistanceTo(e, f, g), reachDistance * reachDistance);
     }
 }
