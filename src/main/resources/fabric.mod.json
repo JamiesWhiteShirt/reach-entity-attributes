@@ -24,9 +24,9 @@
   ],
   "depends": {
     "minecraft": "~1.19.4",
-    "fabricloader": ">=0.14.6",
-    "fabric-registry-sync-v0": ">=0.9.16",
-    "fabric-resource-loader-v0": ">=0.5.3"
+    "fabricloader": ">=0.14.19",
+    "fabric-registry-sync-v0": ">=2.1.3",
+    "fabric-resource-loader-v0": ">=0.11.1"
   },
   "custom": {
     "modmenu": {
