@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
 @Mixin(GameRenderer.class)
 abstract class GameRendererMixin implements SynchronousResourceReloader/*, AutoCloseable*/ {
-    @Shadow @Final private MinecraftClient client;
+    @Shadow @Final MinecraftClient client;
 
     @ModifyConstant(
         method = "updateTargetedEntity(F)V",
