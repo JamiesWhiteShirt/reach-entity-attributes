@@ -49,7 +49,7 @@ public final class ReachEntityAttributes implements ModInitializer {
     }
 
     public static double getInventoryValidationValue(final PlayerEntity player, final double sqBetweenDistance, final double sqReachDistance) {
-        return ReachEntityAttributes.isInInventoryValidationRange(player, sqBetweenDistance, sqReachDistance) ? Double.NEGATIVE_INFINITY : Double.POSITIVE_INFINITY;
+        return isInInventoryValidationRange(player, sqBetweenDistance, sqReachDistance) ? Double.NEGATIVE_INFINITY : Double.POSITIVE_INFINITY;
     }
 
     public static List<PlayerEntity> getPlayersWithinReach(final World world, final int x, final int y, final int z, final double baseReachDistance) {
