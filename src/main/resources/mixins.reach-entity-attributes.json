@@ -9,7 +9,6 @@
   ],
   "mixins": [
     "ChestStateManagerMixin",
-    "EnderChestBlockEntityMixin",
     "ForgingScreenHandlerMixin",
     "InventoryValidationMixin",
     "ItemMixin",

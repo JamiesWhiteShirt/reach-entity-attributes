@@ -23,7 +23,7 @@
     "mixins.reach-entity-attributes.json"
   ],
   "depends": {
-    "minecraft": "~1.19.3",
+    "minecraft": "~1.19.4",
     "fabricloader": ">=0.14.6",
     "fabric-registry-sync-v0": ">=0.9.16",
     "fabric-resource-loader-v0": ">=0.5.3"

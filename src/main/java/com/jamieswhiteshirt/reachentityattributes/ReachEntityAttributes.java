@@ -9,6 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -42,6 +43,14 @@ public final class ReachEntityAttributes implements ModInitializer {
     public static double getSquaredAttackRange(final LivingEntity entity, final double sqBaseAttackRange) {
         final var attackRange = getAttackRange(entity, Math.sqrt(sqBaseAttackRange));
         return attackRange * attackRange;
+    }
+
+    public static boolean isInInventoryValidationRange(final PlayerEntity player, final double sqBetweenDistance, final double sqReachDistance) {
+        return sqBetweenDistance <= getSquaredReachDistance(player, sqReachDistance);
+    }
+
+    public static double getInventoryValidationValue(final PlayerEntity player, final double sqBetweenDistance, final double sqReachDistance) {
+        return ReachEntityAttributes.isInInventoryValidationRange(player, sqBetweenDistance, sqReachDistance) ? Double.NEGATIVE_INFINITY : Double.POSITIVE_INFINITY;
     }
 
     public static List<PlayerEntity> getPlayersWithinReach(final World world, final int x, final int y, final int z, final double baseReachDistance) {
