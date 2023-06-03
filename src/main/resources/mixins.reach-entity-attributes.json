@@ -1,6 +1,6 @@
 {
   "minVersion": "0.8",
-  "compatibilityLevel": "JAVA_16",
+  "compatibilityLevel": "JAVA_17",
   "required": true,
   "package": "com.jamieswhiteshirt.reachentityattributes.mixin",
   "client": [
@@ -10,6 +10,7 @@
   "mixins": [
     "ChestStateManagerMixin",
     "ForgingScreenHandlerMixin",
+    "PlayerInventoryValidationMixin",
     "InventoryValidationMixin",
     "ItemMixin",
     "LivingEntityMixin",
