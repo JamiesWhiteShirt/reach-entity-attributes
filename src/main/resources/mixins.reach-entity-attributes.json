@@ -2,6 +2,7 @@
     "minVersion": "0.8",
     "compatibilityLevel": "JAVA_16",
     "required": true,
+    "plugin" : "com.jamieswhiteshirt.reachentityattributes.MixinPlugin",
     "package": "com.jamieswhiteshirt.reachentityattributes.mixin",
     "client": [
         "client.ClientPlayerInteractionManagerMixin",
@@ -19,7 +20,8 @@
         "ScreenHandlerMixin",
         "ServerPlayerInteractionManagerMixin",
         "ServerPlayNetworkHandlerMixin",
-        "VehicleInventoryValidationMixin"
+        "VehicleInventoryValidationMixin",
+        "forgified.IForgePlayerMixin"
     ],
     "refmap": "refmap.reach-entity-attributes.json"
 }
