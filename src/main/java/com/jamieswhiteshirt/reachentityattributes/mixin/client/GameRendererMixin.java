@@ -8,7 +8,10 @@ import net.minecraft.resource.SynchronousResourceReloader;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Constant;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(GameRenderer.class)
 abstract class GameRendererMixin implements SynchronousResourceReloader/*, AutoCloseable*/ {
@@ -27,7 +30,7 @@ abstract class GameRendererMixin implements SynchronousResourceReloader/*, AutoC
     @ModifyVariable(
         method = "updateTargetedEntity",
         at = @At(value = "STORE"), ordinal = 1)
-    private boolean getActualAttackRange0(boolean hasExtendedReach, @Local(ordinal = 0) double reachDistance) {
+    private boolean getActualAttackRange0(final boolean hasExtendedReach, @Local(ordinal = 0) final double reachDistance) {
         if (this.client.player != null) {
             return reachDistance > ReachEntityAttributes.getAttackRange(this.client.player, 3.0);
         }

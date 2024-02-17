@@ -9,9 +9,9 @@
     "Chloe Dawn"
   ],
   "contact": {
-    "homepage": "https://github.com/JamiesWhiteShirt/reach-entity-attribute",
-    "sources": "https://github.com/JamiesWhiteShirt/reach-entity-attribute/tree/$version",
-    "issues": "https://github.com/JamiesWhiteShirt/reach-entity-attribute/issues"
+    "homepage": "https://github.com/JamiesWhiteShirt/reach-entity-attributes",
+    "sources": "https://github.com/JamiesWhiteShirt/reach-entity-attributes/tree/$version",
+    "issues": "https://github.com/JamiesWhiteShirt/reach-entity-attributes/issues"
   },
   "license": "MIT",
   "entrypoints": {
@@ -23,10 +23,10 @@
     "mixins.reach-entity-attributes.json"
   ],
   "depends": {
-    "minecraft": ">=1.20",
-    "fabricloader": ">=0.14.21",
-    "fabric-registry-sync-v0": ">=2.1.3",
-    "fabric-resource-loader-v0": ">=0.11.1"
+    "minecraft": ">=1.20.4",
+    "fabricloader": ">=0.15.7",
+    "fabric-registry-sync-v0": ">=4.0.18",
+    "fabric-resource-loader-v0": ">=0.11.18"
   },
   "custom": {
     "modmenu": {

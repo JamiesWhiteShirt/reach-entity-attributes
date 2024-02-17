@@ -16,10 +16,10 @@ abstract class ClientPlayerInteractionManagerMixin {
     @ModifyExpressionValue(
         method = "getReachDistance",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;getReachDistance(Z)F"))
-    private float getActualReachDistance(float original) {
+    private float getActualReachDistance(final float reachDistance) {
         if (this.client.player != null) {
-            return (float) ReachEntityAttributes.getReachDistance(this.client.player, original);
+            return (float) ReachEntityAttributes.getReachDistance(this.client.player, reachDistance);
         }
-        return original;
+        return reachDistance;
     }
 }

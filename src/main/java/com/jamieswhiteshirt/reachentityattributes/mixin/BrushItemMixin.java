@@ -9,12 +9,10 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(BrushItem.class)
 abstract class BrushItemMixin {
-
     @ModifyExpressionValue(
         method = "getHitResult",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;getReachDistance(Z)F"))
-    private float getActualReachDistance(float original, PlayerEntity playerEntity) {
-        return (float) ReachEntityAttributes.getReachDistance(playerEntity, original);
+    private float getActualReachDistance(final float reachDistance, final PlayerEntity player) {
+        return (float) ReachEntityAttributes.getReachDistance(player, reachDistance);
     }
-
 }
